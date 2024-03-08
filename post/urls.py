@@ -3,6 +3,9 @@ from django.urls import path
 from home.views import home_view
 from .views import *
 
+app_name = 'post'
+
+
 urlpatterns = [
     path('index/', post_index, name = "index"), 
     path('<int:id>/', post_detail, name="detail"),

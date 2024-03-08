@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 
 
+
+
 class Post(models.Model):
     title = models.CharField(max_length=120, verbose_name="Başlık")
     content = models.TextField(verbose_name="İçerik")
