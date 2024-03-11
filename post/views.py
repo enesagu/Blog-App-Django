@@ -43,8 +43,17 @@ def post_create(request):
 
     return render(request, "post/form.html", context)
 
-def post_update(request):
-    return HttpResponse('Burası Post update sayfası')
+def post_update(request,id):
+    post = get_object_or_404(Post, id=id)
+    form = PostForm(request.POST or None,instance=post)
+    if form.is_valid():
+        form.save()
+    context = {
+        'form': form
+    }
+
+
+    return render(request, "post/form.html", context)
 
 def post_delete(request):
     return HttpResponse('Burası Post delete sayfası')
