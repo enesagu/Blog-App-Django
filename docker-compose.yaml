@@ -5,23 +5,3 @@ services:  # Hizmetlerin tanımlandığı bölüm
     build: .  # Dockerfile dosyasının bulunduğu dizinden imajın oluşturulması
     ports:  # Port yönlendirmesi
       - "8000:8000"  # Host makinedeki 8000 portunu Docker konteynerindeki 8000 portuna yönlendirme
-    depends_on:  # Bağımlılıklar
-      - db  # db hizmetine bağımlı
-
-  db:  # Veritabanı hizmeti
-    volumes:  # Docker volume'leri
-      - ./db.sqlite3:/code/db.sqlite3  # Host makinedeki db.sqlite3 dosyasının Docker konteynerine bağlanması
-
-  redis:  # Redis hizmeti
-    image: redis:5  # Redis 5 imajının kullanılması
-    deploy:  # Dağıtım ayarları
-      resources:  # Kaynaklar
-        limits:  # Sınırlar
-          cpus: '0.25'  # CPU limiti
-          memory: 512M  # Bellek limiti
-   
-volumes:  # Docker volume'leri
-  efs-share:  # EFS paylaşımı
-    driver_opts:  # Sürücü seçenekleri
-      uid: 0  # Kullanıcı kimliği
-      gid: 0  # Grup kimliği
