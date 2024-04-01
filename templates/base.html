@@ -5,12 +5,12 @@
 <head>
     <meta charset = "UTF-8">
     <title>{% block title %}Django Title{% endblock %}</title>
+    <link rel = "stylesheet" href = "{% static 'style.css' %}"> 
 </head>
 <body>
 
     {% include "messages.html" %}
 
-    <img src = "{% static 'image.jpeg' %}">
 
     {% block body %}
         
