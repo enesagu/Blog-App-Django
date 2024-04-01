@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF-8">
+    <title>{% block title %}Django Title{% endblock %}</title>
+</head>
+<body>
+
+    {% include "messages.html" %}
+
+    <img src = "{% static 'image.jpeg' %}">
+
+    {% block body %}
+        
+
+
+    {% endblock %}
+
+
+
+
+
+</body>
+</html>
