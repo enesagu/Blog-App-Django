@@ -38,7 +38,7 @@ def post_create(request):
         if form.is_valid():
             post = form.save()
             # Yeni postun detay sayfasına yönlendirme yap
-            messages.success(request, "Başarılı bir şekilde oluşturdunuz")
+            messages.success(request, "Başarılı bir şekilde oluşturdunuz", extra_tags='message-succes')
 
             return redirect('post:detail', id=post.id)
     else:
@@ -53,7 +53,7 @@ def post_update(request, id):
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            messages.success(request, "Başarılı bir şekilde güncellediniz")
+            messages.success(request, "Başarılı bir şekilde güncellediniz",extra_tags='message-update-succes')
             # Güncelleme işlemi tamamlandıktan sonra detay sayfasına yönlendirme yap
             return redirect('post:detail', id=post.id)
     
@@ -66,4 +66,5 @@ def post_update(request, id):
 def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     post.delete()
+    messages.success(request, "Başarılı bir şekilde silme işlemini gerçekleştirdiniz.",extra_tags='message-deleted-succes')
     return redirect('post:index')
