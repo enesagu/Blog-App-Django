@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse, get_object_or_404,redirect
 from .models import Post
 from .forms import PostForm
-
+from django.contrib import messages
 
 def post_index(request):
     posts = Post.objects.all()
@@ -33,25 +33,33 @@ def post_create(request):
     #     # Formu kullanıcıya göster
     #     form = PostForm()
 
-    form = PostForm(request.POST or None)
-    if form.is_valid():
-        form.save()
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            # Yeni postun detay sayfasına yönlendirme yap
+            messages.success(request, "Başarılı bir şekilde oluşturdunuz")
 
-    context = {
-        'form': form
-    }
+            return redirect('post:detail', id=post.id)
+    else:
+        form = PostForm()
+    
+    return render(request, "post/form.html", {'form': form})
 
-    return render(request, "post/form.html", context)
 
-def post_update(request,id):
+def post_update(request, id):
     post = get_object_or_404(Post, id=id)
-    form = PostForm(request.POST or None,instance=post)
-    if form.is_valid():
-        form.save()
+    form = PostForm(request.POST or None, instance=post)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Başarılı bir şekilde güncellediniz")
+            # Güncelleme işlemi tamamlandıktan sonra detay sayfasına yönlendirme yap
+            return redirect('post:detail', id=post.id)
+    
     context = {
         'form': form
     }
-
 
     return render(request, "post/form.html", context)
 
