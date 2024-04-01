@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse, get_object_or_404
+from django.shortcuts import render,HttpResponse, get_object_or_404,redirect
 from .models import Post
 from .forms import PostForm
 
@@ -55,5 +55,7 @@ def post_update(request,id):
 
     return render(request, "post/form.html", context)
 
-def post_delete(request):
-    return HttpResponse('Burası Post delete sayfası')
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    post.delete()
+    return redirect('post:index')
