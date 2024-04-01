@@ -3,11 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset = "UTF-8">
+    <meta charset = "UTF-8" name = "viewport" content = "width=device-width,inital-scale=1 ">
     <title>{% block title %}Django Title{% endblock %}</title>
-    <link rel = "stylesheet" href = "{% static 'style.css' %}"> 
+    <link rel = "stylesheet" href = "{% static 'css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+
+    {% include 'header.html' %}
 
     {% include "messages.html" %}
 
@@ -20,7 +23,9 @@
 
 
 
+    <script src = "{% static 'js/query.min.js' %}"></script>
+    <script src = "{% static "js/bootstrap.min.js" %}">
 
-
+    </script>
 </body>
 </html>
